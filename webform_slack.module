@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+/**
+ * Implements hook_help().
+ */
+function webform_slack_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.webform_slack':
+      $output = file_get_contents(drupal_get_path('module', 'webform_slack') . '/README.txt');
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_webform_submission_form_alter().
+ */
+function webform_slack_webform_submission_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  if (!empty(\Drupal::config('webform_slack.settings')->get($form['#webform_id']))) {
+    $form['actions']['submit']['#submit'][] = 'webform_slack_data_submit';
+  }
+}
+
+/**
+ *
+ */
+function webform_slack_data_submit(array $form, FormStateInterface $form_state) {
+  $channel = \Drupal::config('webform_slack.settings')->get($form['#webform_id'])['channel'];
+  $message = $form_state->getValues();
+  \Drupal::service('webform_slack.services')->sendRequestToSlack($message, $channel);
+}

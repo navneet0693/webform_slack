@@ -1,0 +1,4 @@
+services:
+  webform_slack.services:
+    class: Drupal\webform_slack\WebformToSlack
+    arguments: ['@logger.factory', '@config.factory', '@http_client']

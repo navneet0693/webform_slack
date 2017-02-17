@@ -1,0 +1,8 @@
+webformslack.admin_settings:
+  path: '/admin/config/services/webformslack'
+  defaults:
+    _title: 'Webform Slack Configurations'
+    _description: 'Slack API integration.'
+    _form: '\Drupal\webform_slack\Form\WebformSlackConfigurationForm'
+  requirements:
+    _permission: 'administer site configuration'

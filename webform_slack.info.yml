@@ -1,0 +1,5 @@
+name: Webform Slack
+type: module
+description: Sends a webform's submission confirmation and data to a chosen channel on webform itself.
+core: 8.x
+configure: webformslack.admin_settings

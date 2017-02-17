@@ -1,0 +1,8 @@
+{
+  "name": "drupal/webform_slack",
+  "description": "The Webform and Slack integration.",
+  "type": "drupal-module",
+  "require": {
+    "maknz/slack": "^1.7.0"
+  }
+}
